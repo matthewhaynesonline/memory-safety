@@ -1,0 +1,10 @@
+[package]
+name = "overflow_snippet"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[[bin]]
+name = "overflow_snippet"
+path = "main.rs"

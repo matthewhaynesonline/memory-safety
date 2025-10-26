@@ -1,0 +1,33 @@
+:root {
+  --app-gradient: linear-gradient(45deg, rgb(134, 136, 255), #b07dfb 100%);
+  --app-gradient--hover: linear-gradient(
+    45deg,
+    rgb(108, 111, 234),
+    #9a64ea 100%
+  );
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-gradient {
+  background-image: var(--app-gradient) !important;
+
+  transition: all 250ms ease;
+}
+
+.bg-gradient:hover,
+.bg-gradient:focus {
+  background-image: var(--app-gradient--hover) !important;
+}
+
+.text-gradient {
+  color: transparent !important;
+  background-image: var(--app-gradient);
+  background-clip: text;
+  display: inline-block;
+}
