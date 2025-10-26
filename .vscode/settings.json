@@ -1,0 +1,7 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "snippets/overflow/rust/Cargo.toml",
+    "snippets/uaf/rust/Cargo.toml",
+    "snippets/lifetimes/rust/Cargo.toml"
+  ]
+}
