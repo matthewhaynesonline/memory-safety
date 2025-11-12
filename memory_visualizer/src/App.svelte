@@ -1502,7 +1502,7 @@
     memory.freeStack(sCap);
     memory.freeStack(sLen);
     memory.freeStack(sAddress);
-    // memory.free(heapVariables[0].address);
+    memory.free(heapVariables[0].address);
 
     stackOne = new StackFrame(
       memory,
@@ -1601,7 +1601,7 @@
     memory.freeStack(sCap);
     memory.freeStack(sLen);
     memory.freeStack(sAddress);
-    // memory.free(heapVariables[0].address);
+    memory.free(heapVariables[0].address);
 
     memory.writePointer(s2address, rAddress);
     memory.writeByte(getLenAddress, 0);
@@ -1685,6 +1685,20 @@
     const sCap = memory.allocateStack(1);
     memory.writeByte(sCap, 0);
 
+    const sNewAddress = memory.allocateStack(1);
+    memory.writePointer(sNewAddress, 0);
+    const sNewLen = memory.allocateStack(1);
+    memory.writeByte(sNewLen, 0);
+    const sNewCap = memory.allocateStack(1);
+    memory.writeByte(sNewCap, 0);
+
+    const s2Address = memory.allocateStack(1);
+    memory.writePointer(s2Address, 0);
+    const s2Len = memory.allocateStack(1);
+    memory.writeByte(s2Len, 0);
+    const s2Cap = memory.allocateStack(1);
+    memory.writeByte(s2Cap, 0);
+
     const heapVariables: Array<FrameVariable> = [
       {
         name: "s",
@@ -1705,13 +1719,17 @@
     memory.writeByte(sLen, variableSizeRust);
     memory.writeByte(sCap, variableSizeRust);
 
-    memory.writePointer(sAddress, heapVariables[0].address);
-    memory.writeByte(sLen, variableSizeRust);
-    memory.writeByte(sCap, variableSizeRust);
+    memory.writePointer(s2Address, heapVariables[0].address);
+    memory.writeByte(s2Len, variableSizeRust);
+    memory.writeByte(s2Cap, variableSizeRust);
 
-    memory.writePointer(sAddress, heapVariables[0].address);
-    memory.writeByte(sLen, variableSizeRust);
-    memory.writeByte(sCap, variableSizeRust);
+    memory.writePointer(sNewAddress, heapVariables[0].address);
+    memory.writeByte(sNewLen, variableSizeRust);
+    memory.writeByte(sNewCap, variableSizeRust);
+
+    memory.freeStack(s2Cap);
+    memory.freeStack(s2Len);
+    memory.freeStack(s2Address);
 
     stackOne = new StackFrame(
       memory,
@@ -1727,19 +1745,19 @@
       [
         {
           name: "s:ptr",
-          address: sAddress,
+          address: sNewAddress,
           size: 1,
           value: heapVariables[0].address,
         },
         {
           name: "s:len",
-          address: sLen,
+          address: sNewLen,
           size: 1,
           value: variableSizeRust,
         },
         {
           name: "s:capacity",
-          address: sCap,
+          address: sNewCap,
           size: 1,
           value: variableSizeRust,
         },
@@ -1984,7 +2002,7 @@
     memory.freeStack(longestValueAddress);
     memory.freeStack(yAddress);
     memory.freeStack(xAddress);
-    memory.free(heapVariables[0].address);
+    memory.free(heapVariables[1].address);
     memory.freeStack(s2Cap);
     memory.freeStack(s2Len);
     memory.freeStack(s2Address);

@@ -18,6 +18,16 @@ fn main() {
     println!("Uncomment fails() to see the compiler error:");
     println!("'string2' does not live long enough");
     // fails();
+
+    // === Example 4 ===
+    let mut s = String::from("hi");
+    println!("s Stack address: {:p}", &s);
+    println!("s Heap address: {:p}", s.as_ptr());
+    s = take_and_return(s); // move ownership in, then back out
+
+    println!("s Stack address: {:p}", &s);
+    println!("s Heap address: {:p}", s.as_ptr());
+    println!("{}", s);
 }
 
 fn works() {
@@ -71,3 +81,10 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 // }
 // // Error: "expected named lifetime parameter"
 // // Rust can't determine how long the returned reference should live.
+
+fn take_and_return(s2: String) -> String {
+    println!("{}", s2);
+    println!("s2 Stack address: {:p}", &s2);
+    println!("s2 Heap address: {:p}", s2.as_ptr());
+    s2 // return ownership back
+}
